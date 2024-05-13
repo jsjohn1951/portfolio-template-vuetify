@@ -3,20 +3,24 @@ import { ref, Ref } from 'vue'
 const loading = ref(false)
 const rules = ref([value => checkApi(value)])
 const timeout = null
-const userName = ''
 
-async function checkApi (userName) {
-        return new Promise(resolve => {
-          clearTimeout(this.timeout)
+const userEmail = ref('');
+const fullName = ref('');
+const userPhone = ref('');
+const message = ref('');
 
-          this.timeout = setTimeout(() => {
-            if (!userName) return resolve('Please enter a user name.')
-            if (userName === 'johnleider') return resolve('User name already taken. Please try another one.')
+// async function checkApi (userName) {
+//         return new Promise(resolve => {
+//           clearTimeout(this.timeout)
 
-            return resolve(true)
-          }, 1000)
-        })
-      }
+//           this.timeout = setTimeout(() => {
+//             if (!userName) return resolve('Please enter a user name.')
+//             if (userName === 'johnleider') return resolve('User name already taken. Please try another one.')
+
+//             return resolve(true)
+//           }, 1000)
+//         })
+//       }
 
 async function submit (event) {
         this.loading = true
@@ -39,6 +43,7 @@ async function submit (event) {
     					<v-form validate-on="submit lazy" @submit.prevent="submit">
 
 							<v-text-field
+								v-model="fullName"
            					 	label="Full Name"
             					prepend-inner-icon="mdi-account"
 								variant="underlined"
@@ -51,20 +56,21 @@ async function submit (event) {
     					  ></v-text-field> -->
 
 						  <v-text-field
-    					    v-model="userName"
+    					    v-model="userPhone"
 							prepend-inner-icon="mdi-phone"
     					    label="Phone Number"
 							variant="underlined"
     					  ></v-text-field>
 
     					  <v-text-field
-    					    v-model="userName"
+    					    v-model="userEmail"
 							prepend-inner-icon="mdi-email"
     					    label="Email"
 							variant="underlined"
     					  ></v-text-field>
 
 						  <v-textarea
+						  v-model="message"
       						autocomplete="Write Your Message Here"
       						label="Message"
     						></v-textarea>
